@@ -1,10 +1,8 @@
 package com.example.practicaClase.persintence.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
