@@ -1,9 +1,5 @@
 package com.example.practicaClase.persintence.entities;
 
-import com.example.practicaClase.persintence.entities.Landlord;
-import com.example.practicaClase.persintence.entities.Owner;
-
-import com.example.practicaClase.persintence.entities.User;
 import jakarta.persistence.*;
 import java.util.List;
 
