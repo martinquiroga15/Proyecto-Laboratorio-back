@@ -8,16 +8,14 @@ import jakarta.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class Owner extends User {
+public class Landlord extends User {
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "landlord")
     private List<Property> propertyList;
 
-    @OneToMany(mappedBy = "owner")
-    private List<Landlord> landlordList;
-
-    @OneToMany(mappedBy = "owner")
-    private List<Tenant> tenantList;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
 
     @ManyToOne
     @JoinColumn(name = "admin_id")
@@ -33,20 +31,12 @@ public class Owner extends User {
         this.propertyList = propertyList;
     }
 
-    public List<Landlord> getLandlordList() {
-        return landlordList;
+    public Owner getOwner() {
+        return owner;
     }
 
-    public void setLandlordList(List<Landlord> landlordList) {
-        this.landlordList = landlordList;
-    }
-
-    public List<Tenant> getTenantList() {
-        return tenantList;
-    }
-
-    public void setTenantList(List<Tenant> tenantList) {
-        this.tenantList = tenantList;
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     public Admin getAdmin() {

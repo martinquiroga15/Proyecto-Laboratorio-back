@@ -1,47 +1,32 @@
 package com.example.practicaClase.persintence.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.List;
 
-public class Admin {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
-    private int id;
+@Entity
+public class Admin extends User {
 
-    @Column
-    private String name;
+    @OneToMany(mappedBy = "admin")
+    private List<Owner> ownerList;
 
-    @Column(nullable = false)
-    private String password;
+    @OneToMany(mappedBy = "admin")
+    private List<Landlord> landlordList;
 
-    // Getter y Setter para el campo id
-    public int getId() {
-        return id;
+    // Getters and Setters
+
+    public List<Owner> getOwnerList() {
+        return ownerList;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOwnerList(List<Owner> ownerList) {
+        this.ownerList = ownerList;
     }
 
-    // Getter y Setter para el campo name
-    public String getName() {
-        return name;
+    public List<Landlord> getLandlordList() {
+        return landlordList;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    // Getter y Setter para el campo password
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setLandlordList(List<Landlord> landlordList) {
+        this.landlordList = landlordList;
     }
 }
-

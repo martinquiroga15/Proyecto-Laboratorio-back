@@ -1,40 +1,52 @@
 package com.example.practicaClase.persintence.entities;
 
+import com.example.practicaClase.persintence.entities.Landlord;
+import com.example.practicaClase.persintence.entities.Owner;
+import com.example.practicaClase.persintence.entities.Tenant;
 import jakarta.persistence.*;
+
 
 @Entity
 public class Property {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;  // Auto-generated ID for database primary key
+    private Long id;
 
-    @Column(nullable = false)
-    private String address;  // Non-nullable column in the database
+    private String address;
 
-    @Column
-    private double area;  // A column to store the area of the property
+    private String type;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id", nullable = false)
-    private Owner owner; // Association with Owner, using a foreign key
+    @ManyToOne
+    @JoinColumn(name = "landlord_id")
+    private Landlord landlord;
 
-    // Constructor without parameters
+    @ManyToOne
+    @JoinColumn(name = "tenant_id")
+    private Tenant tenant;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
+
+    // Constructors, Getters, Setters
+
     public Property() {
     }
 
-    // Constructor with parameters
-    public Property(String address, double area, Owner owner) {
+    public Property(String address, String type, Landlord landlord, Tenant tenant, Owner owner) {
         this.address = address;
-        this.area = area;
+        this.type = type;
+        this.landlord = landlord;
+        this.tenant = tenant;
         this.owner = owner;
     }
 
-    // Getters and Setters
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,12 +58,28 @@ public class Property {
         this.address = address;
     }
 
-    public double getArea() {
-        return area;
+    public String getType() {
+        return type;
     }
 
-    public void setArea(double area) {
-        this.area = area;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Landlord getLandlord() {
+        return landlord;
+    }
+
+    public void setLandlord(Landlord landlord) {
+        this.landlord = landlord;
+    }
+
+    public Tenant getTenant() {
+        return tenant;
+    }
+
+    public void setTenant(Tenant tenant) {
+        this.tenant = tenant;
     }
 
     public Owner getOwner() {
@@ -60,8 +88,5 @@ public class Property {
 
     public void setOwner(Owner owner) {
         this.owner = owner;
-        if (!owner.getProperties().contains(this)) {
-            owner.getProperties().add(this);
-        }
     }
 }
